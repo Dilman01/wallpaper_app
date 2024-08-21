@@ -28,22 +28,22 @@ class WallpaperApp extends StatelessWidget {
       designSize: Size(720, 1280),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MainWidget(),
+        home: WallApp(),
       ),
     );
   }
 }
 
-class MainWidget extends StatefulWidget {
-  const MainWidget({
+class WallApp extends StatefulWidget {
+  const WallApp({
     super.key,
   });
 
   @override
-  State<MainWidget> createState() => _MainWidgetState();
+  State<WallApp> createState() => _WallAppState();
 }
 
-class _MainWidgetState extends State<MainWidget> {
+class _WallAppState extends State<WallApp> {
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
 
   List<PersistentBottomNavBarItem> navBarItems = [
