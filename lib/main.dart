@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:wallpaper_app/core/constants/asset_paths.dart';
 
 import 'package:wallpaper_app/view/screens/home/home_screen.dart';
 import 'package:wallpaper_app/view/screens/category/category_screen.dart';
@@ -16,53 +19,38 @@ void main() {
   );
 }
 
-class WallpaperApp extends StatefulWidget {
+class WallpaperApp extends StatelessWidget {
   const WallpaperApp({super.key});
 
   @override
-  State<WallpaperApp> createState() => _WallpaperAppState();
+  Widget build(BuildContext context) {
+    return const ScreenUtilInit(
+      designSize: Size(720, 1280),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MainWidget(),
+      ),
+    );
+  }
 }
 
-class _WallpaperAppState extends State<WallpaperApp> {
+class MainWidget extends StatefulWidget {
+  const MainWidget({
+    super.key,
+  });
+
+  @override
+  State<MainWidget> createState() => _MainWidgetState();
+}
+
+class _MainWidgetState extends State<MainWidget> {
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
 
   List<PersistentBottomNavBarItem> navBarItems = [
-    PersistentBottomNavBarItem(
-      icon: const Icon(
-        Icons.home,
-      ),
-      title: 'Home',
-      activeColorPrimary: const Color.fromRGBO(240, 240, 240, 1),
-      activeColorSecondary: Colors.black,
-      inactiveColorPrimary: const Color.fromRGBO(168, 168, 168, 1),
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(
-        Icons.category,
-      ),
-      title: 'Category',
-      activeColorPrimary: const Color.fromRGBO(240, 240, 240, 1),
-      activeColorSecondary: Colors.black,
-      inactiveColorPrimary: const Color.fromRGBO(168, 168, 168, 1),
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(
-        Icons.favorite,
-      ),
-      title: 'Favorites',
-      activeColorPrimary: const Color.fromRGBO(240, 240, 240, 1),
-      activeColorSecondary: Colors.black,
-      inactiveColorPrimary: const Color.fromRGBO(168, 168, 168, 1),
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(
-        Icons.settings,
-      ),
-      title: 'Settings',
-      activeColorPrimary: const Color.fromRGBO(240, 240, 240, 1),
-      activeColorSecondary: Colors.black,
-      inactiveColorPrimary: const Color.fromRGBO(168, 168, 168, 1),
-    ),
+    navBarItem(svgPath: AssetPaths.homeIcon, title: 'Home'),
+    navBarItem(svgPath: AssetPaths.categoryIcon, title: 'Category'),
+    navBarItem(svgPath: AssetPaths.favoritesIcon, title: 'Favorites'),
+    navBarItem(svgPath: AssetPaths.settingsIcon, title: 'Settings'),
   ];
 
   List<Widget> screens = [
@@ -80,19 +68,45 @@ class _WallpaperAppState extends State<WallpaperApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: PersistentTabView(
-          context,
-          controller: controller,
-          screens: screens,
-          items: navBarItems,
-          backgroundColor: Colors.white,
-          handleAndroidBackButtonPress: false,
-          navBarStyle: NavBarStyle.style7,
-        ),
+    return SafeArea(
+      child: PersistentTabView(
+        context,
+        controller: controller,
+        screens: screens,
+        items: navBarItems,
+        backgroundColor: Colors.white,
+        handleAndroidBackButtonPress: false,
+        navBarStyle: NavBarStyle.style7,
       ),
     );
   }
+}
+
+PersistentBottomNavBarItem navBarItem(
+    {required String svgPath, required String title}) {
+  return PersistentBottomNavBarItem(
+    icon: SvgPicture.asset(
+      svgPath,
+      height: 35.h,
+      width: 35.w,
+    ),
+    inactiveIcon: SvgPicture.asset(
+      svgPath,
+      height: 35.h,
+      width: 35.w,
+      colorFilter: const ColorFilter.mode(
+        Color.fromRGBO(168, 168, 168, 1),
+        BlendMode.srcIn,
+      ),
+    ),
+    title: title,
+    textStyle: TextStyle(
+      fontSize: 27.sp,
+      fontWeight: FontWeight.w500,
+    ),
+    contentPadding: 10.r,
+    activeColorPrimary: const Color.fromRGBO(240, 240, 240, 1),
+    activeColorSecondary: Colors.black,
+    inactiveColorPrimary: const Color.fromRGBO(168, 168, 168, 1),
+  );
 }
