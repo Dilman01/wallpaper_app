@@ -1,48 +1,78 @@
-import 'package:dio/dio.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:wallpaper_app/core/api/api_client.dart';
-import 'package:wallpaper_app/repositories/wallpaper_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wallpaper_app/providers.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    const ProviderScope(
+      child: WallpaperApp(),
+    ),
+  );
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class WallpaperApp extends ConsumerWidget {
+  const WallpaperApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var image = WallpaperRepository(apiClient: ApiClient(dio: Dio()))
-        .getWallpapers(editorsChoice: true);
+  Widget build(BuildContext context, WidgetRef ref) {
+    const int pageSize = 20;
 
     return MaterialApp(
-      home: Scaffold(
-        body: FutureBuilder(
-          future: image,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
+      home: SafeArea(
+        child: Scaffold(
+          body: GridView.builder(
+            padding: const EdgeInsets.all(10),
+            // itemCount: pageSize,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.7,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+            ),
+            itemBuilder: (context, index) {
+              final page = index ~/ pageSize + 1;
+              final indexInPage = index % pageSize;
+              log('index: $index, page: $page, indexInPage: $indexInPage');
+              if (page > 25) {
+                return null;
+              }
+
+              final wallpapers = ref.watch(
+                fetchWallpapersProvider(
+                  page,
+                  order: 'latest',
+                ),
               );
-            }
 
-            if (snapshot.data == null) {
-              return const Center(
-                child: Text('No Data!'),
+              return wallpapers.when(
+                data: (data) {
+                  if (indexInPage >= data.length) {
+                    return null;
+                  }
+
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                        image: NetworkImage(data[indexInPage].largeImageURL),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                },
+                error: (error, stackTrace) => Center(
+                  child: Text(
+                    error.toString(),
+                  ),
+                ),
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
               );
-            }
-
-            final data = snapshot.data!;
-
-            return ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Image.network(data[index].largeImageURL),
-                );
-              },
-            );
-          },
+            },
+          ),
         ),
       ),
     );

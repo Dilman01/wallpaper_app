@@ -6,13 +6,17 @@ class WallpaperRepository {
 
   WallpaperRepository({required this.apiClient});
 
-  Future<List<WallpaperModel>> getWallpapers(
-      {String order = 'popular', bool editorsChoice = false}) async {
+  Future<List<WallpaperModel>> getWallpapers({
+    String order = 'popular',
+    bool editorsChoice = false,
+    required int page,
+  }) async {
     try {
       final response = await apiClient.get(
         queryParameters: {
           'order': order,
           'editors_choice': editorsChoice,
+          'page': page,
         },
       );
 
@@ -30,11 +34,14 @@ class WallpaperRepository {
   }
 
   Future<List<WallpaperModel>> searchWallpapers(
-      {required String search}) async {
+      {required String search, required int page}) async {
     try {
-      final response = await apiClient.get(queryParameters: {
-        'q': search,
-      });
+      final response = await apiClient.get(
+        queryParameters: {
+          'q': search,
+          'page': page,
+        },
+      );
 
       final List<dynamic> data = response.data['hits'];
 
@@ -49,11 +56,15 @@ class WallpaperRepository {
     }
   }
 
-  Future<List<WallpaperModel>> getCategory({required String category}) async {
+  Future<List<WallpaperModel>> getCategory({
+    required String category,
+    required int page,
+  }) async {
     try {
       final response = await apiClient.get(
         queryParameters: {
           'category': category,
+          'page': page,
         },
       );
 
