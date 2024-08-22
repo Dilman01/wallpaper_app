@@ -6,10 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
 
-import 'package:wallpaper_app/view/screens/home/home_screen.dart';
-import 'package:wallpaper_app/view/screens/category/category_screen.dart';
-import 'package:wallpaper_app/view/screens/favorites/favorites_screen.dart';
-import 'package:wallpaper_app/view/screens/settings/settings_screen.dart';
+import 'package:wallpaper_app/view/home/home_screen.dart';
+import 'package:wallpaper_app/view/category/category_screen.dart';
+import 'package:wallpaper_app/view/favorites/favorites_screen.dart';
+import 'package:wallpaper_app/view/settings/settings_screen.dart';
 
 void main() {
   runApp(

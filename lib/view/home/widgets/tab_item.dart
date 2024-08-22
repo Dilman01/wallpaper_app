@@ -19,7 +19,6 @@ class TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tab(
       height: 80.h,
-      // iconMargin: EdgeInsets.all(10),
       icon: isSelected
           ? SvgPicture.asset(
               svgPath,
