@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
+import 'package:wallpaper_app/core/router/router_provider.dart';
 
 import 'package:wallpaper_app/view/home/home_screen.dart';
 import 'package:wallpaper_app/view/category/category_screen.dart';
@@ -19,16 +20,17 @@ void main() {
   );
 }
 
-class WallpaperApp extends StatelessWidget {
+class WallpaperApp extends ConsumerWidget {
   const WallpaperApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const ScreenUtilInit(
-      designSize: Size(720, 1280),
-      child: MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routeProvider);
+    return ScreenUtilInit(
+      designSize: const Size(720, 1280),
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        home: WallApp(),
+        routerConfig: router,
       ),
     );
   }
@@ -82,8 +84,10 @@ class _WallAppState extends State<WallApp> {
   }
 }
 
-PersistentBottomNavBarItem navBarItem(
-    {required String svgPath, required String title}) {
+PersistentBottomNavBarItem navBarItem({
+  required String svgPath,
+  required String title,
+}) {
   return PersistentBottomNavBarItem(
     icon: SvgPicture.asset(
       svgPath,

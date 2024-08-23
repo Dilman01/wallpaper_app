@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wallpaper_app/core/common/providers/providers.dart';
 import 'package:wallpaper_app/core/common/widgets/shimmer_loading.dart';
 import 'package:wallpaper_app/core/common/widgets/wallpaper_card.dart';
 import 'package:wallpaper_app/view_model/home_view_model/home_view_model_provider.dart';
@@ -25,7 +26,7 @@ class GridViewWidget extends ConsumerWidget {
         crossAxisSpacing: 6,
         mainAxisSpacing: 8,
       ),
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15).r,
+      padding: const EdgeInsets.symmetric(horizontal: 15).r,
       itemBuilder: (context, index) {
         final page = index ~/ pageSize + 1;
         final indexInPage = index % pageSize;
@@ -50,8 +51,11 @@ class GridViewWidget extends ConsumerWidget {
 
             final wallpaper = data[indexInPage];
 
-            return WallpaperCard(
-              imageUrl: wallpaper.largeImageURL,
+            return ProviderScope(
+              overrides: [
+                currentWallpaperProvider.overrideWithValue(wallpaper)
+              ],
+              child: const WallpaperCard(),
             );
           },
           error: (error, stackTrace) => Center(
