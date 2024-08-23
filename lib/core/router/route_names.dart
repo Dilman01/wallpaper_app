@@ -4,4 +4,5 @@ class RouteNames {
   static const favorites = 'favorites';
   static const settings = 'settings';
   static const wallpaper = 'wallpaper';
+  static const search = 'search';
 }

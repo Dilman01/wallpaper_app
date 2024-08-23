@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wallpaper_app/view/home/widgets/grid_view_widget.dart';
+import 'package:wallpaper_app/view/home/widgets/search_container.dart';
 import 'package:wallpaper_app/view/home/widgets/tab_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,8 +15,9 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.white,
-          title: const Text('Wallpaper App'),
+          title: const SearchContainer(),
           centerTitle: true,
           bottom: PreferredSize(
             preferredSize: Size(619.w, 146.h),

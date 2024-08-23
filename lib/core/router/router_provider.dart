@@ -8,6 +8,7 @@ import 'package:wallpaper_app/main.dart';
 import 'package:wallpaper_app/view/category/category_screen.dart';
 import 'package:wallpaper_app/view/favorites/favorites_screen.dart';
 import 'package:wallpaper_app/view/home/home_screen.dart';
+import 'package:wallpaper_app/view/search/search_screen.dart';
 import 'package:wallpaper_app/view/settings/settings_screen.dart';
 
 part 'router_provider.g.dart';
@@ -22,7 +23,7 @@ GoRouter route(RouteRef ref) {
       ShellRoute(
         navigatorKey: _rootNavigatorKey,
         builder: (context, state, child) {
-          return const WallApp(); // Pass child to WallApp
+          return const WallApp();
         },
         routes: [
           GoRoute(
@@ -57,6 +58,11 @@ GoRouter route(RouteRef ref) {
             imageUrl: imageUrl,
           );
         },
+      ),
+      GoRoute(
+        path: '/search',
+        name: RouteNames.search,
+        builder: (context, state) => const SearchScreen(),
       ),
     ],
   );

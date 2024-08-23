@@ -16,7 +16,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20).r,
+      margin: const EdgeInsets.only(top: 5, bottom: 30, left: 20, right: 20).r,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(225, 244, 255, 1),
         borderRadius: BorderRadius.circular(60.r),
