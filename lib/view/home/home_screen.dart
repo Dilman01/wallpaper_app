@@ -17,10 +17,20 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.white,
-          title: const SearchContainer(),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              FlutterLogo(
+                size: 100.r,
+              ),
+              const SearchContainer(),
+            ],
+          ),
           centerTitle: true,
+          toolbarHeight: 150.h,
           bottom: PreferredSize(
-            preferredSize: Size(619.w, 146.h),
+            preferredSize: Size(620.w, 100.h),
             child: const TabBarWidget(),
           ),
         ),

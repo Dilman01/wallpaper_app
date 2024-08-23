@@ -16,7 +16,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 5, bottom: 30, left: 20, right: 20).r,
+      margin: const EdgeInsets.only(bottom: 30, left: 20, right: 20).r,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(225, 244, 255, 1),
         borderRadius: BorderRadius.circular(60.r),
@@ -34,9 +34,11 @@ class _TabBarWidgetState extends State<TabBarWidget> {
             end: Alignment.bottomRight,
           ),
         ),
+        indicatorPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 10).r,
+        indicatorSize: TabBarIndicatorSize.tab,
         labelColor: Colors.white,
         labelStyle: TextStyle(fontSize: 24.sp),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5).r,
         splashFactory: NoSplash.splashFactory,
         isScrollable: false,
         physics: const NeverScrollableScrollPhysics(),
@@ -46,32 +48,20 @@ class _TabBarWidgetState extends State<TabBarWidget> {
           });
         },
         tabs: [
-          SizedBox(
-            height: 80.h,
-            width: 170.w,
-            child: TabItem(
-              title: 'Best',
-              svgPath: AssetPaths.editorsChoiceIcon,
-              isSelected: isTabSelected == 0,
-            ),
+          TabItem(
+            title: 'Editor\'s Choice',
+            svgPath: AssetPaths.editorsChoiceIcon,
+            isSelected: isTabSelected == 0,
           ),
-          SizedBox(
-            height: 80.h,
-            width: 170.w,
-            child: TabItem(
-              title: 'Trending',
-              svgPath: AssetPaths.trendingIcon,
-              isSelected: isTabSelected == 1,
-            ),
+          TabItem(
+            title: 'Trending',
+            svgPath: AssetPaths.trendingIcon,
+            isSelected: isTabSelected == 1,
           ),
-          SizedBox(
-            height: 80.h,
-            width: 170.w,
-            child: TabItem(
-              title: 'Latest',
-              svgPath: AssetPaths.latestIcon,
-              isSelected: isTabSelected == 2,
-            ),
+          TabItem(
+            title: 'Latest',
+            svgPath: AssetPaths.latestIcon,
+            isSelected: isTabSelected == 2,
           ),
         ],
       ),

@@ -69,11 +69,11 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         hintText: 'Find Wallpapers...',
                         hintStyle: TextStyle(
                           color: const Color.fromRGBO(182, 182, 182, 1),
-                          fontSize: 28.sp,
+                          fontSize: 28.spMin,
                         ),
                         suffixIcon: Icon(
                           Icons.search,
-                          size: 50.w,
+                          size: 50.r,
                         ),
                         suffixIconColor: const Color.fromRGBO(182, 182, 182, 1),
                         border: const OutlineInputBorder(

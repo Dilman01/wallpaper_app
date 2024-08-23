@@ -15,11 +15,11 @@ class SearchContainer extends ConsumerWidget {
       },
       child: Container(
         height: 70.h,
-        width: 600.w,
+        width: 550.w,
         margin: const EdgeInsets.only(top: 20).r,
         padding: const EdgeInsets.symmetric(
           horizontal: 35,
-          vertical: 20,
+          // vertical: 20,
         ).r,
         decoration: BoxDecoration(
           color: const Color.fromRGBO(240, 240, 240, 1),
@@ -27,19 +27,19 @@ class SearchContainer extends ConsumerWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               'Find Wallpapers...',
               style: TextStyle(
                 color: const Color.fromRGBO(182, 182, 182, 1),
-                fontSize: 28.sp,
+                fontSize: 28.spMin,
               ),
             ),
             Icon(
               Icons.search,
               color: const Color.fromRGBO(182, 182, 182, 1),
-              size: 50.w,
+              size: 50.r,
             ),
           ],
         ),
