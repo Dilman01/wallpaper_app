@@ -9,7 +9,7 @@ import 'package:wallpaper_app/core/constants/asset_paths.dart';
 import 'package:wallpaper_app/core/router/router_provider.dart';
 
 import 'package:wallpaper_app/view/home/home_screen.dart';
-import 'package:wallpaper_app/view/category/category_screen.dart';
+import 'package:wallpaper_app/view/category/categories_screen.dart';
 import 'package:wallpaper_app/view/favorites/favorites_screen.dart';
 import 'package:wallpaper_app/view/settings/settings_screen.dart';
 
@@ -61,7 +61,7 @@ class _WallAppState extends State<WallApp> {
 
   List<Widget> screens = [
     const HomeScreen(),
-    const CategoryScreen(),
+    const CategoriesScreen(),
     const FavoritesScreen(),
     const SettingsScreen(),
   ];

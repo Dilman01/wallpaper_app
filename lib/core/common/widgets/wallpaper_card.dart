@@ -23,10 +23,10 @@ class WallpaperCard extends ConsumerWidget {
           onTap: () {
             context.pushNamed(
               RouteNames.wallpaper,
-              // pathParameters: {
-              //   'imageUrl': imageUrl,
-              // },
-              extra: wallpaper.largeImageURL,
+              pathParameters: {
+                'imageUrl': wallpaper.largeImageURL,
+              },
+              // extra: wallpaper.largeImageURL,
               // queryParameters: {
               //   'imageUrl': imageUrl,
               // },

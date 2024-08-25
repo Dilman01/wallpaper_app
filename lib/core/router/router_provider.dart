@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wallpaper_app/view/category/category_screen.dart';
 import 'package:wallpaper_app/view/wallpaper/wallpaper_screen.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
 import 'package:wallpaper_app/main.dart';
-import 'package:wallpaper_app/view/category/category_screen.dart';
+import 'package:wallpaper_app/view/category/categories_screen.dart';
 import 'package:wallpaper_app/view/favorites/favorites_screen.dart';
 import 'package:wallpaper_app/view/home/home_screen.dart';
 import 'package:wallpaper_app/view/search/search_screen.dart';
@@ -32,9 +33,9 @@ GoRouter route(RouteRef ref) {
             builder: (context, state) => const HomeScreen(),
           ),
           GoRoute(
-            path: '/category',
-            name: RouteNames.category,
-            builder: (context, state) => const CategoryScreen(),
+            path: '/categories',
+            name: RouteNames.categories,
+            builder: (context, state) => const CategoriesScreen(),
           ),
           GoRoute(
             path: '/favorites',
@@ -49,10 +50,10 @@ GoRouter route(RouteRef ref) {
         ],
       ),
       GoRoute(
-        path: '/wallpaper',
+        path: '/wallpaper/:imageUrl',
         name: RouteNames.wallpaper,
         builder: (context, state) {
-          final String imageUrl = state.extra!.toString();
+          final String imageUrl = state.pathParameters['imageUrl']!;
 
           return WallpaperScreen(
             imageUrl: imageUrl,
@@ -63,6 +64,15 @@ GoRouter route(RouteRef ref) {
         path: '/search',
         name: RouteNames.search,
         builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: '/category/:title',
+        name: RouteNames.category,
+        builder: (context, state) {
+          final String title = state.pathParameters['title']!;
+
+          return CategoryScreen(title: title);
+        },
       ),
     ],
   );
