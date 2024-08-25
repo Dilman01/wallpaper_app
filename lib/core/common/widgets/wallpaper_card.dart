@@ -19,6 +19,7 @@ class WallpaperCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final wallpaper = ref.watch(currentWallpaperProvider);
+
     return Hero(
       tag: isFavoritesScreen == 'yes' ? wallpaper.largeImageURL : wallpaper.id,
       child: Material(

@@ -5,7 +5,7 @@ import 'package:wallpaper_app/core/constants/asset_paths.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
-import 'package:wallpaper_app/view_model/favorites_view_model/favorites_view_model_provider.dart';
+import 'package:wallpaper_app/view/wallpaper/widgets/favorites_button.dart';
 
 class ButtonsContainer extends ConsumerWidget {
   const ButtonsContainer({
@@ -17,7 +17,6 @@ class ButtonsContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final wallpapersList = ref.watch(favoritesViewModelProvider);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -98,33 +97,7 @@ class ButtonsContainer extends ConsumerWidget {
         ),
         Column(
           children: [
-            InkWell(
-              onTap: () {
-                ref
-                    .read(favoritesViewModelProvider.notifier)
-                    .toggleFavorite(wallpaper);
-              },
-              child: Container(
-                padding: const EdgeInsets.all(25).r,
-                decoration: const BoxDecoration(
-                  color: Color.fromRGBO(25, 30, 49, 0.55),
-                  shape: BoxShape.circle,
-                ),
-                child: wallpapersList.contains(wallpaper)
-                    ? SvgPicture.asset(
-                        AssetPaths.favoritesIcon,
-                        height: 40.h,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.red,
-                          BlendMode.srcIn,
-                        ),
-                      )
-                    : SvgPicture.asset(
-                        AssetPaths.heartIcon,
-                        height: 40.h,
-                      ),
-              ),
-            ),
+            FavoritesButton(wallpaper: wallpaper),
             SizedBox(
               height: 10.h,
             ),
