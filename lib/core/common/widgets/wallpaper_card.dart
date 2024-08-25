@@ -16,36 +16,41 @@ class WallpaperCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final wallpaper = ref.watch(currentWallpaperProvider);
-    return InkWell(
-      onTap: () {
-        context.pushNamed(
-          RouteNames.wallpaper,
-          // pathParameters: {
-          //   'imageUrl': imageUrl,
-          // },
-          extra: wallpaper.largeImageURL,
-          // queryParameters: {
-          //   'imageUrl': imageUrl,
-          // },
-        );
-      },
-      child: CachedNetworkImage(
-        imageUrl: wallpaper.largeImageURL,
-        imageBuilder: (context, imageProvider) => Container(
-          height: 360.h,
-          width: 200.w,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12).r,
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
+    return Hero(
+      tag: wallpaper.largeImageURL,
+      child: Material(
+        child: InkWell(
+          onTap: () {
+            context.pushNamed(
+              RouteNames.wallpaper,
+              // pathParameters: {
+              //   'imageUrl': imageUrl,
+              // },
+              extra: wallpaper.largeImageURL,
+              // queryParameters: {
+              //   'imageUrl': imageUrl,
+              // },
+            );
+          },
+          child: CachedNetworkImage(
+            imageUrl: wallpaper.largeImageURL,
+            imageBuilder: (context, imageProvider) => Container(
+              height: 360.h,
+              width: 200.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12).r,
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-        ),
-        placeholder: (context, url) => const ShimmerLoading(),
-        errorWidget: (context, url, error) => Center(
-          child: Text(
-            error.toString(),
+            placeholder: (context, url) => const ShimmerLoading(),
+            errorWidget: (context, url, error) => Center(
+              child: Text(
+                error.toString(),
+              ),
+            ),
           ),
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wallpaper_app/core/common/widgets/wallpaper_screen.dart';
+import 'package:wallpaper_app/view/wallpaper/wallpaper_screen.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
 import 'package:wallpaper_app/main.dart';
 import 'package:wallpaper_app/view/category/category_screen.dart';
