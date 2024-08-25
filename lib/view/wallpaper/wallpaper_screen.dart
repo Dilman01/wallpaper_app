@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wallpaper_app/models/wallpaper_model.dart';
 import 'package:wallpaper_app/view/wallpaper/widgets/buttons_container.dart';
 
 class WallpaperScreen extends ConsumerWidget {
   const WallpaperScreen({
     super.key,
-    required this.imageUrl,
+    required this.wallpaper,
+    required this.isFavoritesScreen,
   });
 
-  final String imageUrl;
+  final WallpaperModel wallpaper;
+  final String isFavoritesScreen;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,21 +28,25 @@ class WallpaperScreen extends ConsumerWidget {
         body: Stack(
           children: [
             Hero(
-              tag: imageUrl,
+              tag: isFavoritesScreen == 'yes'
+                  ? wallpaper.largeImageURL
+                  : wallpaper.id,
               child: SizedBox(
                 height: double.infinity,
                 width: double.infinity,
                 child: CachedNetworkImage(
-                  imageUrl: imageUrl,
+                  imageUrl: wallpaper.largeImageURL,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               bottom: 30,
               right: 0,
               left: 0,
-              child: ButtonsContainer(),
+              child: ButtonsContainer(
+                wallpaper: wallpaper,
+              ),
             ),
             Positioned(
               top: 10,

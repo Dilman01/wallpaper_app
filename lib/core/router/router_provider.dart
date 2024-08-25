@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wallpaper_app/models/wallpaper_model.dart';
 import 'package:wallpaper_app/view/category/category_screen.dart';
 import 'package:wallpaper_app/view/wallpaper/wallpaper_screen.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
@@ -50,13 +51,16 @@ GoRouter route(RouteRef ref) {
         ],
       ),
       GoRoute(
-        path: '/wallpaper/:imageUrl',
+        path: '/wallpaper/:fav',
         name: RouteNames.wallpaper,
         builder: (context, state) {
-          final String imageUrl = state.pathParameters['imageUrl']!;
+          final wallpaper = state.extra as WallpaperModel;
+          final isFavoritesScreen = state.pathParameters['fav'] ?? '';
+          debugPrint('Navigating to wallpaper with fav: $isFavoritesScreen');
 
           return WallpaperScreen(
-            imageUrl: imageUrl,
+            wallpaper: wallpaper,
+            isFavoritesScreen: isFavoritesScreen,
           );
         },
       ),

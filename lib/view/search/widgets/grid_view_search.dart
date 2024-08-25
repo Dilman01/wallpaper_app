@@ -71,7 +71,9 @@ class GridViewSearch extends ConsumerWidget {
                             currentWallpaperProvider
                                 .overrideWithValue(wallpaper)
                           ],
-                          child: const WallpaperCard(),
+                          child: const WallpaperCard(
+                            isFavoritesScreen: 'no',
+                          ),
                         );
                       },
                       error: (error, stackTrace) => Center(

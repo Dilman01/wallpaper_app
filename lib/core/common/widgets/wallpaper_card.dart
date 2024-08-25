@@ -11,25 +11,25 @@ import 'package:wallpaper_app/core/router/route_names.dart';
 class WallpaperCard extends ConsumerWidget {
   const WallpaperCard({
     super.key,
+    required this.isFavoritesScreen,
   });
+
+  final String isFavoritesScreen;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final wallpaper = ref.watch(currentWallpaperProvider);
     return Hero(
-      tag: wallpaper.largeImageURL,
+      tag: isFavoritesScreen == 'yes' ? wallpaper.largeImageURL : wallpaper.id,
       child: Material(
         child: InkWell(
           onTap: () {
             context.pushNamed(
               RouteNames.wallpaper,
+              extra: wallpaper,
               pathParameters: {
-                'imageUrl': wallpaper.largeImageURL,
+                'fav': isFavoritesScreen,
               },
-              // extra: wallpaper.largeImageURL,
-              // queryParameters: {
-              //   'imageUrl': imageUrl,
-              // },
             );
           },
           child: CachedNetworkImage(

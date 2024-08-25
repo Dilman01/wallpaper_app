@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wallpaper_app/models/wallpaper_model.dart';
+import 'package:wallpaper_app/view_model/favorites_view_model/favorites_view_model_provider.dart';
 
-class ButtonsContainer extends StatelessWidget {
-  const ButtonsContainer({super.key});
+class ButtonsContainer extends ConsumerWidget {
+  const ButtonsContainer({
+    super.key,
+    required this.wallpaper,
+  });
+
+  final WallpaperModel wallpaper;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final wallpapersList = ref.watch(favoritesViewModelProvider);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -89,15 +98,31 @@ class ButtonsContainer extends StatelessWidget {
         ),
         Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(25).r,
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(25, 30, 49, 0.55),
-                shape: BoxShape.circle,
-              ),
-              child: SvgPicture.asset(
-                AssetPaths.heartIcon,
-                height: 40.h,
+            InkWell(
+              onTap: () {
+                ref
+                    .read(favoritesViewModelProvider.notifier)
+                    .toggleFavorite(wallpaper);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(25).r,
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(25, 30, 49, 0.55),
+                  shape: BoxShape.circle,
+                ),
+                child: wallpapersList.contains(wallpaper)
+                    ? SvgPicture.asset(
+                        AssetPaths.favoritesIcon,
+                        height: 40.h,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.red,
+                          BlendMode.srcIn,
+                        ),
+                      )
+                    : SvgPicture.asset(
+                        AssetPaths.heartIcon,
+                        height: 40.h,
+                      ),
               ),
             ),
             SizedBox(
