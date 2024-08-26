@@ -6,7 +6,7 @@ import 'package:wallpaper_app/core/constants/asset_paths.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
 import 'package:wallpaper_app/view_model/favorites_view_model/favorites_view_model_provider.dart';
 
-class FavoritesButton extends ConsumerStatefulWidget {
+class FavoritesButton extends ConsumerWidget {
   const FavoritesButton({
     super.key,
     required this.wallpaper,
@@ -15,29 +15,38 @@ class FavoritesButton extends ConsumerStatefulWidget {
   final WallpaperModel wallpaper;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _FavoritesButtonState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final wallpapersAsync = ref.watch(favoritesViewModelProvider);
 
-class _FavoritesButtonState extends ConsumerState<FavoritesButton> {
-  // bool isFavorite =
-  @override
-  Widget build(BuildContext context) {
-    final wallpapersList = ref.watch(favoritesViewModelProvider).valueOrNull;
-    return InkWell(
-      onTap: () async {
-        await ref
-            .read(favoritesViewModelProvider.notifier)
-            .toggleFavorite(widget.wallpaper);
-      },
-      child: Container(
-        padding: const EdgeInsets.all(25).r,
-        decoration: const BoxDecoration(
-          color: Color.fromRGBO(25, 30, 49, 0.55),
-          shape: BoxShape.circle,
-        ),
-        child:
-            wallpapersList != null && wallpapersList.contains(widget.wallpaper)
+    return wallpapersAsync.when(
+      data: (data) {
+        final wallpapersIds = data
+            .map(
+              (e) => e.id,
+            )
+            .toList();
+
+        bool isFav = wallpapersIds.contains(wallpaper.id);
+
+        return InkWell(
+          onTap: () async {
+            if (isFav) {
+              await ref
+                  .read(favoritesViewModelProvider.notifier)
+                  .removeFavorite(wallpaper);
+            } else {
+              await ref
+                  .read(favoritesViewModelProvider.notifier)
+                  .addFavorite(wallpaper);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(25).r,
+            decoration: const BoxDecoration(
+              color: Color.fromRGBO(25, 30, 49, 0.55),
+              shape: BoxShape.circle,
+            ),
+            child: isFav
                 ? SvgPicture.asset(
                     AssetPaths.favoritesIcon,
                     height: 40.h,
@@ -50,6 +59,23 @@ class _FavoritesButtonState extends ConsumerState<FavoritesButton> {
                     AssetPaths.heartIcon,
                     height: 40.h,
                   ),
+          ),
+        );
+      },
+      error: (error, stackTrace) => Center(
+        child: Text(error.toString()),
+      ),
+      loading: () => Center(
+        child: Container(
+          padding: const EdgeInsets.all(25).r,
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(25, 30, 49, 0.55),
+            shape: BoxShape.circle,
+          ),
+          child: const CircularProgressIndicator(
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

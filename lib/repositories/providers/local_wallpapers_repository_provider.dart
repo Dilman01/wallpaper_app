@@ -3,7 +3,7 @@ import 'package:wallpaper_app/repositories/local_wallpaper_repository.dart';
 
 part 'local_wallpapers_repository_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 LocalWallpaperRepository localWallpaperRepository(
     LocalWallpaperRepositoryRef ref) {
   return LocalWallpaperRepository();
