@@ -5,6 +5,7 @@ import 'package:wallpaper_app/core/constants/asset_paths.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
+import 'package:wallpaper_app/view/wallpaper/widgets/buttom_sheet.dart';
 import 'package:wallpaper_app/view/wallpaper/widgets/favorites_button.dart';
 
 class ButtonsContainer extends ConsumerWidget {
@@ -62,15 +63,29 @@ class ButtonsContainer extends ConsumerWidget {
         ),
         Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(25).r,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: SvgPicture.asset(
-                AssetPaths.brushIcon,
-                height: 60.h,
+            InkWell(
+              onTap: () {
+                showBottomSheet(
+                  context: context,
+                  showDragHandle: true,
+                  backgroundColor: Colors.white,
+                  builder: (context) {
+                    return ButtomSheet(
+                      wallpaper: wallpaper,
+                    );
+                  },
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(25).r,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: SvgPicture.asset(
+                  AssetPaths.brushIcon,
+                  height: 60.h,
+                ),
               ),
             ),
             SizedBox(

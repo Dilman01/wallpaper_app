@@ -10,4 +10,7 @@ class AssetPaths {
   static const heartIcon = 'assets/icons/heart_icon.svg';
   static const shareIcon = 'assets/icons/share_icon.svg';
   static const downloadIcon = 'assets/icons/download_icon.svg';
+  static const setHomeIcon = 'assets/icons/set_home_icon.svg';
+  static const setLockIcon = 'assets/icons/set_lock_icon.svg';
+  static const setBothIcon = 'assets/icons/set_both_icon.svg';
 }
