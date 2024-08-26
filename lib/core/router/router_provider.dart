@@ -56,7 +56,6 @@ GoRouter route(RouteRef ref) {
         builder: (context, state) {
           final wallpaper = state.extra as WallpaperModel;
           final isFavoritesScreen = state.pathParameters['fav'] ?? '';
-          debugPrint('Navigating to wallpaper with fav: $isFavoritesScreen');
 
           return WallpaperScreen(
             wallpaper: wallpaper,
