@@ -13,4 +13,10 @@ class AssetPaths {
   static const setHomeIcon = 'assets/icons/set_home_icon.svg';
   static const setLockIcon = 'assets/icons/set_lock_icon.svg';
   static const setBothIcon = 'assets/icons/set_both_icon.svg';
+  static const feedbackIcon = 'assets/icons/feedback_icon.svg';
+  static const notificationIcon = 'assets/icons/notification_icon.svg';
+  static const inviteIcon = 'assets/icons/invite_icon.svg';
+  static const privacyIcon = 'assets/icons/privacy_icon.svg';
+  static const starIcon = 'assets/icons/star_icon.svg';
+  static const termsIcon = 'assets/icons/terms_icon.svg';
 }

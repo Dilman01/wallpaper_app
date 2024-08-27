@@ -25,12 +25,6 @@ class ButtonsContainer extends ConsumerStatefulWidget {
 }
 
 class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
-  // @override
-  // void dispose() {
-  //   ScaffoldMessenger.of(context).clearSnackBars();
-  //   super.dispose();
-  // }
-
   void _saveNetworkImage() async {
     var response = await Dio().get(
       widget.wallpaper.largeImageURL,
