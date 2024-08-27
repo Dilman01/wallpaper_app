@@ -25,6 +25,12 @@ class ButtonsContainer extends ConsumerStatefulWidget {
 }
 
 class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
+  // @override
+  // void dispose() {
+  //   ScaffoldMessenger.of(context).clearSnackBars();
+  //   super.dispose();
+  // }
+
   void _saveNetworkImage() async {
     var response = await Dio().get(
       widget.wallpaper.largeImageURL,
@@ -61,124 +67,129 @@ class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Column(
-          children: [
-            InkWell(
-              onTap: _saveNetworkImage,
-              child: Container(
-                padding: const EdgeInsets.all(25).r,
-                decoration: const BoxDecoration(
-                  color: Color.fromRGBO(25, 30, 49, 0.55),
-                  shape: BoxShape.circle,
-                ),
-                child: SvgPicture.asset(
-                  AssetPaths.downloadIcon,
-                  height: 40.h,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.white,
-                    BlendMode.srcIn,
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Column(
+            children: [
+              InkWell(
+                onTap: _saveNetworkImage,
+                child: Container(
+                  padding: const EdgeInsets.all(25).r,
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(25, 30, 49, 0.55),
+                    shape: BoxShape.circle,
+                  ),
+                  child: SvgPicture.asset(
+                    AssetPaths.downloadIcon,
+                    height: 40.h,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 4).r,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(25, 30, 49, 0.55),
-                borderRadius: BorderRadius.circular(34).r,
+              SizedBox(
+                height: 10.h,
               ),
-              child: const Text(
-                'Download',
-                style: TextStyle(
-                  color: Colors.white,
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 4).r,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(25, 30, 49, 0.55),
+                  borderRadius: BorderRadius.circular(34).r,
+                ),
+                child: const Text(
+                  'Download',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: 30.w,
-        ),
-        Column(
-          children: [
-            InkWell(
-              onTap: () {
-                showBottomSheet(
-                  context: context,
-                  showDragHandle: true,
-                  backgroundColor: Colors.white,
-                  builder: (context) {
-                    return ButtomSheet(
-                      wallpaper: widget.wallpaper,
-                    );
-                  },
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.all(25).r,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: SvgPicture.asset(
-                  AssetPaths.brushIcon,
-                  height: 60.h,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 4).r,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(25, 30, 49, 0.7),
-                borderRadius: BorderRadius.circular(34).r,
-              ),
-              child: const Text(
-                'Set',
-                style: TextStyle(
-                  color: Colors.white,
+            ],
+          ),
+          SizedBox(
+            width: 30.w,
+          ),
+          Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  showBottomSheet(
+                    context: context,
+                    showDragHandle: true,
+                    backgroundColor: Colors.white,
+                    builder: (context) {
+                      return ButtomSheet(
+                        wallpaper: widget.wallpaper,
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(25).r,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: SvgPicture.asset(
+                    AssetPaths.brushIcon,
+                    height: 60.h,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: 30.w,
-        ),
-        Column(
-          children: [
-            FavoritesButton(wallpaper: widget.wallpaper),
-            SizedBox(
-              height: 10.h,
-            ),
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 4).r,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(25, 30, 49, 0.7),
-                borderRadius: BorderRadius.circular(34).r,
+              SizedBox(
+                height: 15.h,
               ),
-              child: const Text(
-                'Favorite',
-                style: TextStyle(
-                  color: Colors.white,
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 4).r,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(25, 30, 49, 0.7),
+                  borderRadius: BorderRadius.circular(34).r,
+                ),
+                child: const Text(
+                  'Set',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+          SizedBox(
+            width: 30.w,
+          ),
+          Column(
+            children: [
+              FavoritesButton(wallpaper: widget.wallpaper),
+              SizedBox(
+                height: 10.h,
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 4).r,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(25, 30, 49, 0.7),
+                  borderRadius: BorderRadius.circular(34).r,
+                ),
+                child: const Text(
+                  'Favorite',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
