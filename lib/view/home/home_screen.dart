@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wallpaper_app/core/constants/asset_paths.dart';
 import 'package:wallpaper_app/view/home/widgets/grid_view_widget.dart';
 import 'package:wallpaper_app/view/home/widgets/search_container.dart';
 import 'package:wallpaper_app/view/home/widgets/tab_bar_widget.dart';
@@ -19,10 +21,16 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FlutterLogo(
-                size: 100.r,
+              SizedBox(
+                height: 100.h,
+                width: 150.w,
+                child: SvgPicture.asset(
+                  AssetPaths.logoIcon,
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
               ),
               const SearchContainer(),
             ],

@@ -19,4 +19,5 @@ class AssetPaths {
   static const privacyIcon = 'assets/icons/privacy_icon.svg';
   static const starIcon = 'assets/icons/star_icon.svg';
   static const termsIcon = 'assets/icons/terms_icon.svg';
+  static const logoIcon = 'assets/icons/logo_icon.svg';
 }

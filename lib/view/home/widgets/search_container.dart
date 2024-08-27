@@ -15,7 +15,7 @@ class SearchContainer extends ConsumerWidget {
       },
       child: Container(
         height: 70.h,
-        width: 550.w,
+        width: 510.w,
         margin: const EdgeInsets.only(top: 20).r,
         padding: const EdgeInsets.symmetric(
           horizontal: 35,

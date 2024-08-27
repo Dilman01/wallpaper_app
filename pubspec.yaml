@@ -35,9 +35,27 @@ dev_dependencies:
   riverpod_generator: ^2.4.3
   riverpod_lint: ^2.3.13
   custom_lint: ^0.6.5
+  flutter_native_splash: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/icons/
+    - assets/logo_splash.png
+
+flutter_native_splash:
+  android: true
+  ios: true 
+  web: false
+  image: assets/logo_splash.png
+  color: "#191E31"
+  android_12:
+   image: assets/logo_splash.png
+   color: "#191E31" 
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"
