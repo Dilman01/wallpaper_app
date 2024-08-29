@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wallpaper_app/core/common/providers/providers.dart';
+import 'package:wallpaper_app/core/common/providers/current_wallpaper_provider.dart';
 import 'package:wallpaper_app/core/common/widgets/shimmer_loading.dart';
 import 'package:wallpaper_app/core/common/widgets/wallpaper_card.dart';
 import 'package:wallpaper_app/view_model/favorites_view_model/favorites_view_model_provider.dart';

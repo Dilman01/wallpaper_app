@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wallpaper_app/core/common/providers/providers.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:wallpaper_app/core/common/providers/current_wallpaper_provider.dart';
+import 'package:wallpaper_app/core/common/providers/internet_connection_provider.dart';
+import 'package:wallpaper_app/core/common/widgets/no_internet.dart';
 import 'package:wallpaper_app/core/common/widgets/shimmer_loading.dart';
 import 'package:wallpaper_app/core/common/widgets/wallpaper_card.dart';
 import 'package:wallpaper_app/view_model/category_view_model/category_view_model_provider.dart';
@@ -17,52 +20,70 @@ class GridViewCategory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 1 / 2,
-        crossAxisSpacing: 6,
-        mainAxisSpacing: 8,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 15).r,
-      itemBuilder: (context, index) {
-        final page = index ~/ pageSize + 1;
-        final indexInPage = index % pageSize;
+    final internetConnection = ref.watch(internetConnectionProvider);
 
-        if (page > 25) {
-          return null;
+    return internetConnection.when(
+      skipLoadingOnRefresh: false,
+      skipLoadingOnReload: false,
+      data: (data) {
+        if (data == InternetConnectionStatus.disconnected) {
+          return const Center(
+            child: NoInternet(),
+          );
         }
 
-        final wallpaperAsync = ref.watch(
-          categoryViewModelProvider(
-            page: page,
-            category: title.toLowerCase(),
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 1 / 2,
+            crossAxisSpacing: 6,
+            mainAxisSpacing: 8,
           ),
-        );
+          padding: const EdgeInsets.symmetric(horizontal: 15).r,
+          itemBuilder: (context, index) {
+            final page = index ~/ pageSize + 1;
+            final indexInPage = index % pageSize;
 
-        return wallpaperAsync.when(
-          data: (data) {
-            if (indexInPage >= data.length) {
+            if (page > 25) {
               return null;
             }
 
-            final wallpaper = data[indexInPage];
-
-            return ProviderScope(
-              overrides: [
-                currentWallpaperProvider.overrideWithValue(wallpaper)
-              ],
-              child: const WallpaperCard(
-                isFavoritesScreen: 'no',
+            final wallpaperAsync = ref.watch(
+              categoryViewModelProvider(
+                page: page,
+                category: title.toLowerCase(),
               ),
             );
+
+            return wallpaperAsync.when(
+              data: (data) {
+                if (indexInPage >= data.length) {
+                  return null;
+                }
+
+                final wallpaper = data[indexInPage];
+
+                return ProviderScope(
+                  overrides: [
+                    currentWallpaperProvider.overrideWithValue(wallpaper)
+                  ],
+                  child: const WallpaperCard(
+                    isFavoritesScreen: 'no',
+                  ),
+                );
+              },
+              error: (error, stackTrace) => const Center(
+                child: Text('Something went wrong! try again later.'),
+              ),
+              loading: () => const ShimmerLoading(),
+            );
           },
-          error: (error, stackTrace) => Center(
-            child: Text(error.toString()),
-          ),
-          loading: () => const ShimmerLoading(),
         );
       },
+      error: (error, stackTrace) => const Center(
+        child: Text('Something went wrong! try again later.'),
+      ),
+      loading: () => const ShimmerLoading(),
     );
   }
 }
