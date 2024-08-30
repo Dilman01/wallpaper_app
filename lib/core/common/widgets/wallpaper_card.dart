@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:wallpaper_app/core/common/providers/current_wallpaper_provider.dart';
 import 'package:wallpaper_app/core/common/widgets/shimmer_loading.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 
 class WallpaperCard extends ConsumerWidget {
   const WallpaperCard({
@@ -49,7 +50,7 @@ class WallpaperCard extends ConsumerWidget {
             placeholder: (context, url) => const ShimmerLoading(),
             errorWidget: (context, url, error) => Center(
               child: Text(
-                error.toString(),
+                S.of(context).error,
               ),
             ),
           ),

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
+import 'package:wallpaper_app/core/router/route_names.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/view/settings/widgets/settings_button.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -12,9 +16,10 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Colors.white,
         title: Text(
-          'Settings',
+          S.of(context).settings,
           style: TextStyle(
             fontSize: 50.spMin,
             fontWeight: FontWeight.bold,
@@ -27,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 700.h,
+            height: 750.h,
             width: 670.w,
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 30).r,
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 40).r,
@@ -49,8 +54,8 @@ class SettingsScreen extends StatelessWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                const SettingsButton(
-                  title: 'Push notification',
+                SettingsButton(
+                  title: S.of(context).pushNotification,
                   svgPath: AssetPaths.notificationIcon,
                   isNotification: true,
                 ),
@@ -59,8 +64,22 @@ class SettingsScreen extends StatelessWidget {
                   thickness: 0.8,
                   indent: 50,
                 ),
-                const SettingsButton(
-                  title: 'Invite a friend',
+                InkWell(
+                  onTap: () {
+                    context.pushNamed(RouteNames.language);
+                  },
+                  child: SettingsButton(
+                    title: S.of(context).language,
+                    svgPath: AssetPaths.languageIcon,
+                  ),
+                ),
+                const Divider(
+                  color: Color.fromRGBO(197, 197, 197, 1),
+                  thickness: 0.8,
+                  indent: 50,
+                ),
+                SettingsButton(
+                  title: S.of(context).invite,
                   svgPath: AssetPaths.inviteIcon,
                 ),
                 const Divider(
@@ -68,8 +87,8 @@ class SettingsScreen extends StatelessWidget {
                   thickness: 0.8,
                   indent: 50,
                 ),
-                const SettingsButton(
-                  title: 'Rate this app',
+                SettingsButton(
+                  title: S.of(context).rate,
                   svgPath: AssetPaths.starIcon,
                 ),
                 const Divider(
@@ -77,8 +96,8 @@ class SettingsScreen extends StatelessWidget {
                   thickness: 0.8,
                   indent: 50,
                 ),
-                const SettingsButton(
-                  title: 'Feedback & bugs',
+                SettingsButton(
+                  title: S.of(context).feedback,
                   svgPath: AssetPaths.feedbackIcon,
                 ),
                 const Divider(
@@ -86,8 +105,8 @@ class SettingsScreen extends StatelessWidget {
                   thickness: 0.8,
                   indent: 50,
                 ),
-                const SettingsButton(
-                  title: 'Terms & Conditions',
+                SettingsButton(
+                  title: S.of(context).terms,
                   svgPath: AssetPaths.termsIcon,
                 ),
                 const Divider(
@@ -95,8 +114,8 @@ class SettingsScreen extends StatelessWidget {
                   thickness: 0.8,
                   indent: 50,
                 ),
-                const SettingsButton(
-                  title: 'Privacy Policy',
+                SettingsButton(
+                  title: S.of(context).privacy,
                   svgPath: AssetPaths.privacyIcon,
                 ),
               ],

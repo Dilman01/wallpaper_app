@@ -6,4 +6,5 @@ class RouteNames {
   static const settings = 'settings';
   static const wallpaper = 'wallpaper';
   static const search = 'search';
+  static const language = 'language';
 }

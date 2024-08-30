@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
 
 class ButtomSheet extends StatefulWidget {
@@ -63,7 +64,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Wallpaper set!',
+                    S.of(context).setDialogHeader,
                     style: TextStyle(
                       fontSize: 35.spMin,
                       fontWeight: FontWeight.bold,
@@ -73,13 +74,13 @@ class _ButtomSheetState extends State<ButtomSheet> {
                     height: 10.h,
                   ),
                   Text(
-                    'All done! your phone looks amazing.',
+                    S.of(context).setDialogBody,
                     style: TextStyle(
                       fontSize: 26.spMin,
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 10.h,
                   ),
                   Center(
                     child: TextButton(
@@ -90,7 +91,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                         foregroundColor: const Color.fromRGBO(117, 117, 117, 1),
                       ),
                       child: Text(
-                        'DISMISS',
+                        S.of(context).dismiss,
                         style: TextStyle(
                           fontSize: 28.spMin,
                         ),
@@ -121,7 +122,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
           : Column(
               children: [
                 Text(
-                  'What would you like to do?',
+                  S.of(context).bottomSheetTitle,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40.spMin,
@@ -142,7 +143,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                     children: [
                       SetWallpaperButton(
                         onTap: () => setWallpaper(AsyncWallpaper.HOME_SCREEN),
-                        title: 'Set on home screen',
+                        title: S.of(context).setWallpaperHome,
                         svgPath: AssetPaths.setHomeIcon,
                       ),
                       Divider(
@@ -151,7 +152,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                       ),
                       SetWallpaperButton(
                         onTap: () => setWallpaper(AsyncWallpaper.LOCK_SCREEN),
-                        title: 'Set on lock screen',
+                        title: S.of(context).setWallpaperLock,
                         svgPath: AssetPaths.setLockIcon,
                       ),
                       Divider(
@@ -160,7 +161,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                       ),
                       SetWallpaperButton(
                         onTap: () => setWallpaper(AsyncWallpaper.BOTH_SCREENS),
-                        title: 'Set on both screen',
+                        title: S.of(context).setWallpaperBoth,
                         svgPath: AssetPaths.setBothIcon,
                       ),
                     ],
@@ -182,7 +183,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                     ),
                   ),
                   child: Text(
-                    'Cancel',
+                    S.of(context).cancel,
                     style: TextStyle(
                       fontSize: 35.spMin,
                       fontWeight: FontWeight.bold,

@@ -8,6 +8,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
 import 'package:wallpaper_app/view/wallpaper/widgets/buttom_sheet.dart';
 import 'package:wallpaper_app/view/wallpaper/widgets/favorites_button.dart';
@@ -41,9 +42,10 @@ class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text(
-            'Image was downloaded successfully! 😊',
-            style: TextStyle(
+          content: Text(
+            // ignore: use_build_context_synchronously
+            S.of(context).imageDownloadSuccess,
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w600,
             ),
@@ -99,9 +101,9 @@ class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
                   color: const Color.fromRGBO(25, 30, 49, 0.55),
                   borderRadius: BorderRadius.circular(34).r,
                 ),
-                child: const Text(
-                  'Download',
-                  style: TextStyle(
+                child: Text(
+                  S.of(context).downloadButtonText,
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -148,9 +150,9 @@ class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
                   color: const Color.fromRGBO(25, 30, 49, 0.7),
                   borderRadius: BorderRadius.circular(34).r,
                 ),
-                child: const Text(
-                  'Set',
-                  style: TextStyle(
+                child: Text(
+                  S.of(context).setButtonText,
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -173,9 +175,9 @@ class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
                   color: const Color.fromRGBO(25, 30, 49, 0.7),
                   borderRadius: BorderRadius.circular(34).r,
                 ),
-                child: const Text(
-                  'Favorite',
-                  style: TextStyle(
+                child: Text(
+                  S.of(context).favoriteButtonText,
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),

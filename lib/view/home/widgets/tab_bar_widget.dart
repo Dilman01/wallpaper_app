@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/view/home/widgets/tab_item.dart';
 
 class TabBarWidget extends StatefulWidget {
@@ -49,17 +50,17 @@ class _TabBarWidgetState extends State<TabBarWidget> {
         },
         tabs: [
           TabItem(
-            title: 'Editor\'s Choice',
+            title: S.of(context).firstTabTitle,
             svgPath: AssetPaths.editorsChoiceIcon,
             isSelected: isTabSelected == 0,
           ),
           TabItem(
-            title: 'Trending',
+            title: S.of(context).secondTabTitle,
             svgPath: AssetPaths.trendingIcon,
             isSelected: isTabSelected == 1,
           ),
           TabItem(
-            title: 'Latest',
+            title: S.of(context).thirdTabTitle,
             svgPath: AssetPaths.latestIcon,
             isSelected: isTabSelected == 2,
           ),

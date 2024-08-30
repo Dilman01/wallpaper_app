@@ -7,6 +7,7 @@ import 'package:wallpaper_app/core/common/providers/internet_connection_provider
 import 'package:wallpaper_app/core/common/widgets/no_internet.dart';
 import 'package:wallpaper_app/core/common/widgets/shimmer_loading.dart';
 import 'package:wallpaper_app/core/common/widgets/wallpaper_card.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/view/search/providers/providers.dart';
 import 'package:wallpaper_app/view_model/search_view_model/search_view_model_provider.dart';
 
@@ -33,8 +34,8 @@ class GridViewSearch extends ConsumerWidget {
         }
 
         return search.trim().isEmpty
-            ? const Center(
-                child: Text('Search for something...'),
+            ? Center(
+                child: Text(S.of(context).searchFor),
               )
             : ref
                 .watch(
@@ -43,9 +44,8 @@ class GridViewSearch extends ConsumerWidget {
                 .when(
                   data: (data) {
                     if (data.isEmpty) {
-                      return const Center(
-                        child: Text(
-                            'No results were found!\nTry searching for another term.'),
+                      return Center(
+                        child: Text(S.of(context).searchNoResult),
                       );
                     }
 
@@ -91,17 +91,16 @@ class GridViewSearch extends ConsumerWidget {
                               ),
                             );
                           },
-                          error: (error, stackTrace) => const Center(
-                            child:
-                                Text('Something went wrong! try again later.'),
+                          error: (error, stackTrace) => Center(
+                            child: Text(S.of(context).error),
                           ),
                           loading: () => const ShimmerLoading(),
                         );
                       },
                     );
                   },
-                  error: (error, stackTrace) => const Center(
-                    child: Text('Something went wrong! try again later.'),
+                  error: (error, stackTrace) => Center(
+                    child: Text(S.of(context).error),
                   ),
                   loading: () => const Center(
                     child: CircularProgressIndicator(
@@ -110,8 +109,8 @@ class GridViewSearch extends ConsumerWidget {
                   ),
                 );
       },
-      error: (error, stackTrace) => const Center(
-        child: Text('Something went wrong! try again later.'),
+      error: (error, stackTrace) => Center(
+        child: Text(S.of(context).error),
       ),
       loading: () => const Center(
         child: CircularProgressIndicator(

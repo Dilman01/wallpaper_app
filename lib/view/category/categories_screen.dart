@@ -4,8 +4,10 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:wallpaper_app/core/enums/categories.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -18,9 +20,10 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Colors.white,
-        title: const Text(
-          'Categories',
+        title: Text(
+          S.of(context).categorires,
           style: TextStyle(
+            fontSize: 50.spMin,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -42,7 +45,9 @@ class CategoriesScreen extends StatelessWidget {
               context.pushNamed(
                 RouteNames.category,
                 pathParameters: {
-                  'title': cateogry[index].name,
+                  'title': Intl.getCurrentLocale() == 'ar'
+                      ? cateogry[index].arabicName
+                      : cateogry[index].name,
                 },
               );
             },
@@ -65,7 +70,9 @@ class CategoriesScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  cateogry[index].name,
+                  Intl.getCurrentLocale() == 'ar'
+                      ? cateogry[index].arabicName
+                      : cateogry[index].name,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

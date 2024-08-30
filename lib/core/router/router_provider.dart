@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
 import 'package:wallpaper_app/view/category/category_screen.dart';
+import 'package:wallpaper_app/view/settings/language_screen.dart';
 import 'package:wallpaper_app/view/wallpaper/wallpaper_screen.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
 import 'package:wallpaper_app/main.dart';
@@ -76,6 +77,11 @@ GoRouter route(RouteRef ref) {
 
           return CategoryScreen(title: title);
         },
+      ),
+      GoRoute(
+        path: '/language',
+        name: RouteNames.language,
+        builder: (context, state) => const LanguageScreen(),
       ),
     ],
   );

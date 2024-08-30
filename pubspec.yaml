@@ -26,6 +26,13 @@ dependencies:
   image_gallery_saver: ^2.0.3
   internet_connection_checker: ^2.0.0
 
+  flutter_localizations:
+        sdk: flutter
+  intl: any
+  shared_preferences: ^2.3.2
+
+
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,15 +56,17 @@ flutter:
 
 flutter_native_splash:
   android: true
-  ios: true 
+  ios: true
   web: false
   image: assets/logo_splash.png
   color: "#191E31"
   android_12:
-   image: assets/logo_splash.png
-   color: "#191E31" 
+    image: assets/logo_splash.png
+    color: "#191E31"
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/logo.png"
+flutter_intl:
+  enabled: true

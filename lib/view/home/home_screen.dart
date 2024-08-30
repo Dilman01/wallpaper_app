@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               SizedBox(
                 height: 100.h,
-                width: 150.w,
+                width: 130.w,
                 child: SvgPicture.asset(
                   AssetPaths.logoIcon,
                   height: double.infinity,

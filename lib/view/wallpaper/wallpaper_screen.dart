@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
 import 'package:wallpaper_app/view/wallpaper/widgets/buttons_container.dart';
 
@@ -62,7 +63,9 @@ class WallpaperScreen extends ConsumerWidget {
                     context.pop();
                   },
                   icon: Icon(
-                    Icons.arrow_back_rounded,
+                    Intl.getCurrentLocale() == 'ar'
+                        ? Icons.arrow_forward_rounded
+                        : Icons.arrow_back_rounded,
                     color: Colors.white,
                     size: 60.r,
                   ),

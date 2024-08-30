@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wallpaper_app/core/common/providers/internet_connection_provider.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 
 class NoInternet extends ConsumerWidget {
   const NoInternet({
@@ -19,7 +20,7 @@ class NoInternet extends ConsumerWidget {
         children: [
           Center(
             child: Text(
-              'No Internet Connection!',
+              S.of(context).noInternetTitle,
               style: TextStyle(
                 fontSize: 50.spMin,
                 fontWeight: FontWeight.bold,
@@ -45,7 +46,7 @@ class NoInternet extends ConsumerWidget {
               vertical: 10,
             ).r,
             child: Text(
-              'Please check your connection then refresh the page.',
+              S.of(context).noInternetBody,
               style: TextStyle(
                 fontSize: 30.spMin,
                 fontWeight: FontWeight.w500,
@@ -66,7 +67,7 @@ class NoInternet extends ConsumerWidget {
               foregroundColor: Colors.white,
               fixedSize: Size(300.w, 50.h),
             ),
-            child: const Text('Retry'),
+            child: Text(S.of(context).retry),
           ),
           SizedBox(
             height: 100.h,

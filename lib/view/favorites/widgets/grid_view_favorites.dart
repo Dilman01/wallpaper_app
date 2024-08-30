@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wallpaper_app/core/common/providers/current_wallpaper_provider.dart';
 import 'package:wallpaper_app/core/common/widgets/shimmer_loading.dart';
 import 'package:wallpaper_app/core/common/widgets/wallpaper_card.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/view_model/favorites_view_model/favorites_view_model_provider.dart';
 
 class GridViewFavorites extends ConsumerWidget {
@@ -18,8 +19,8 @@ class GridViewFavorites extends ConsumerWidget {
     return favoriteWallpapers.when(
       data: (data) {
         if (data.isEmpty) {
-          return const Center(
-            child: Text('No favorites found.'),
+          return Center(
+            child: Text(S.of(context).noFavorites),
           );
         }
 
@@ -51,7 +52,7 @@ class GridViewFavorites extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) => Center(
-        child: Text(error.toString()),
+        child: Text(S.of(context).error),
       ),
       loading: () => const ShimmerLoading(),
     );

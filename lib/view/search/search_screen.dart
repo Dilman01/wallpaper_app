@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/view/search/providers/providers.dart';
 import 'package:wallpaper_app/view/search/widgets/grid_view_search.dart';
 
@@ -66,7 +67,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       selectionControls: MaterialTextSelectionControls(),
                       decoration: InputDecoration(
                         focusColor: Colors.black,
-                        hintText: 'Find Wallpapers...',
+                        hintText: S.of(context).searchHintText,
                         hintStyle: TextStyle(
                           color: const Color.fromRGBO(182, 182, 182, 1),
                           fontSize: 28.spMin,

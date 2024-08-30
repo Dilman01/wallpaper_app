@@ -21,4 +21,5 @@ class AssetPaths {
   static const termsIcon = 'assets/icons/terms_icon.svg';
   static const logoIcon = 'assets/icons/logo_icon.svg';
   static const noInternet = 'assets/no_internet.svg';
+  static const languageIcon = 'assets/icons/language_icon.svg';
 }
