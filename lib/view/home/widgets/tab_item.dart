@@ -40,17 +40,16 @@ class TabItem extends StatelessWidget {
           child: isSelected
               ? Text(
                   title,
-                  style: TextStyle(
-                    fontSize: 22.spMin,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.white,
+                      ),
                 )
               : ShaderMask(
                   blendMode: BlendMode.srcIn,
-                  shaderCallback: (bounds) => const LinearGradient(
+                  shaderCallback: (bounds) => LinearGradient(
                     colors: [
-                      Color.fromRGBO(103, 71, 231, 1),
-                      Color.fromRGBO(0, 255, 240, 1),
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.onPrimary,
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -59,10 +58,9 @@ class TabItem extends StatelessWidget {
                   ),
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 22.spMin,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Colors.white,
+                        ),
                   ),
                 ),
         ),

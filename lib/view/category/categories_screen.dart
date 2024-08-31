@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -16,16 +15,10 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const cateogry = Categories.values;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        backgroundColor: Colors.white,
         title: Text(
           S.of(context).categorires,
-          style: TextStyle(
-            fontSize: 50.spMin,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         centerTitle: true,
         scrolledUnderElevation: 0,
@@ -44,11 +37,7 @@ class CategoriesScreen extends StatelessWidget {
             onTap: () {
               context.pushNamed(
                 RouteNames.category,
-                pathParameters: {
-                  'title': Intl.getCurrentLocale() == 'ar'
-                      ? cateogry[index].arabicName
-                      : cateogry[index].name,
-                },
+                extra: cateogry[index],
               );
             },
             child: Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wallpaper_app/core/enums/categories.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
 import 'package:wallpaper_app/view/category/category_screen.dart';
 import 'package:wallpaper_app/view/settings/language_screen.dart';
@@ -70,12 +71,11 @@ GoRouter route(RouteRef ref) {
         builder: (context, state) => const SearchScreen(),
       ),
       GoRoute(
-        path: '/category/:title',
+        path: '/category',
         name: RouteNames.category,
         builder: (context, state) {
-          final String title = state.pathParameters['title']!;
-
-          return CategoryScreen(title: title);
+          final category = state.extra as Categories;
+          return CategoryScreen(category: category);
         },
       ),
       GoRoute(

@@ -27,7 +27,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: Column(
           children: [
             Row(
@@ -49,7 +48,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   margin: const EdgeInsets.only(top: 20, right: 20).r,
                   padding: const EdgeInsets.symmetric(horizontal: 10).r,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(240, 240, 240, 1),
+                    color: Theme.of(context).colorScheme.onSecondary,
                     borderRadius: BorderRadius.circular(98).r,
                   ),
                   child: Theme(
@@ -62,23 +61,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     child: TextField(
                       controller: _searchController,
                       autofocus: true,
-                      cursorColor: Colors.black,
+                      cursorColor: Theme.of(context).colorScheme.onTertiary,
                       textCapitalization: TextCapitalization.sentences,
                       selectionControls: MaterialTextSelectionControls(),
                       decoration: InputDecoration(
-                        focusColor: Colors.black,
                         hintText: S.of(context).searchHintText,
-                        hintStyle: TextStyle(
-                          color: const Color.fromRGBO(182, 182, 182, 1),
-                          fontSize: 28.spMin,
-                        ),
                         suffixIcon: Icon(
                           Icons.search,
                           size: 50.r,
-                        ),
-                        suffixIconColor: const Color.fromRGBO(182, 182, 182, 1),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide.none,
                         ),
                       ),
                       onSubmitted: (value) {

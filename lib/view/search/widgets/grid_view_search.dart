@@ -92,7 +92,10 @@ class GridViewSearch extends ConsumerWidget {
                             );
                           },
                           error: (error, stackTrace) => Center(
-                            child: Text(S.of(context).error),
+                            child: Text(
+                              S.of(context).error,
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
                           ),
                           loading: () => const ShimmerLoading(),
                         );
@@ -100,21 +103,27 @@ class GridViewSearch extends ConsumerWidget {
                     );
                   },
                   error: (error, stackTrace) => Center(
-                    child: Text(S.of(context).error),
+                    child: Text(
+                      S.of(context).error,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                   ),
-                  loading: () => const Center(
+                  loading: () => Center(
                     child: CircularProgressIndicator(
-                      color: Colors.blue,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
                 );
       },
       error: (error, stackTrace) => Center(
-        child: Text(S.of(context).error),
+        child: Text(
+          S.of(context).error,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
-      loading: () => const Center(
+      loading: () => Center(
         child: CircularProgressIndicator(
-          color: Colors.blue,
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
       ),
     );

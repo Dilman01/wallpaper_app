@@ -21,10 +21,13 @@ class _LanguageScreenState extends ConsumerState<LanguageScreen> {
       data: (data) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
-              backgroundColor: Colors.white,
-              title: Text(S.of(context).language),
+              title: Text(
+                S.of(context).language,
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
             ),
             body: Padding(
               padding:
@@ -42,15 +45,12 @@ class _LanguageScreenState extends ConsumerState<LanguageScreen> {
                         children: [
                           Text(
                             'English',
-                            style: TextStyle(
-                              fontSize: 40.spMin,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           if (data == 'en')
                             Icon(
                               Icons.check,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.onTertiary,
                               size: 60.r,
                             ),
                         ],
@@ -71,15 +71,12 @@ class _LanguageScreenState extends ConsumerState<LanguageScreen> {
                         children: [
                           Text(
                             'العربية',
-                            style: TextStyle(
-                              fontSize: 40.spMin,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           if (data == 'ar')
                             Icon(
                               Icons.check,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.onTertiary,
                               size: 60.r,
                             ),
                         ],
@@ -93,11 +90,14 @@ class _LanguageScreenState extends ConsumerState<LanguageScreen> {
         );
       },
       error: (error, stackTrace) => Center(
-        child: Text(S.of(context).error),
+        child: Text(
+          S.of(context).error,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
-      loading: () => const Center(
+      loading: () => Center(
         child: CircularProgressIndicator(
-          color: Colors.blue,
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
       ),
     );

@@ -23,7 +23,7 @@ class SearchContainer extends ConsumerWidget {
           // vertical: 20,
         ).r,
         decoration: BoxDecoration(
-          color: const Color.fromRGBO(240, 240, 240, 1),
+          color: Theme.of(context).colorScheme.onSecondaryContainer,
           borderRadius: BorderRadius.circular(98).r,
         ),
         child: Row(
@@ -33,13 +33,13 @@ class SearchContainer extends ConsumerWidget {
             Text(
               S.of(context).searchHintText,
               style: TextStyle(
-                color: const Color.fromRGBO(182, 182, 182, 1),
+                color: Theme.of(context).colorScheme.onTertiaryContainer,
                 fontSize: 28.spMin,
               ),
             ),
             Icon(
               Icons.search,
-              color: const Color.fromRGBO(182, 182, 182, 1),
+              color: Theme.of(context).colorScheme.onTertiaryContainer,
               size: 50.r,
             ),
           ],

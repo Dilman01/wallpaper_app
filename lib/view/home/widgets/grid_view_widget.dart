@@ -29,8 +29,8 @@ class GridViewWidget extends ConsumerWidget {
       onRefresh: () async {
         ref.invalidate(homeViewModelProvider);
       },
-      color: Colors.white,
-      backgroundColor: const Color.fromRGBO(25, 30, 49, 1),
+      color: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       child: internetConnection.when(
         skipLoadingOnRefresh: false,
         skipLoadingOnReload: false,
@@ -86,7 +86,10 @@ class GridViewWidget extends ConsumerWidget {
                   );
                 },
                 error: (error, stackTrace) => Center(
-                  child: Text(S.of(context).error),
+                  child: Text(
+                    S.of(context).error,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
                 loading: () => const ShimmerLoading(),
               );
@@ -94,11 +97,14 @@ class GridViewWidget extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) => Center(
-          child: Text(S.of(context).error),
+          child: Text(
+            S.of(context).error,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
         ),
-        loading: () => const Center(
+        loading: () => Center(
           child: CircularProgressIndicator(
-            color: Colors.blue,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
         ),
       ),

@@ -21,11 +21,7 @@ class NoInternet extends ConsumerWidget {
           Center(
             child: Text(
               S.of(context).noInternetTitle,
-              style: TextStyle(
-                fontSize: 50.spMin,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(25, 30, 49, 1),
-              ),
+              style: Theme.of(context).textTheme.headlineLarge,
             ),
           ),
           SizedBox(
@@ -47,11 +43,7 @@ class NoInternet extends ConsumerWidget {
             ).r,
             child: Text(
               S.of(context).noInternetBody,
-              style: TextStyle(
-                fontSize: 30.spMin,
-                fontWeight: FontWeight.w500,
-                color: const Color.fromRGBO(25, 30, 49, 1),
-              ),
+              style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
           ),
@@ -62,11 +54,6 @@ class NoInternet extends ConsumerWidget {
             onPressed: () {
               ref.invalidate(internetConnectionProvider);
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromRGBO(25, 30, 49, 1),
-              foregroundColor: Colors.white,
-              fixedSize: Size(300.w, 50.h),
-            ),
             child: Text(S.of(context).retry),
           ),
           SizedBox(

@@ -60,10 +60,10 @@ class S {
     );
   }
 
-  /// `Categorires`
+  /// `Categories`
   String get categorires {
     return Intl.message(
-      'Categorires',
+      'Categories',
       name: 'categorires',
       desc: '',
       args: [],

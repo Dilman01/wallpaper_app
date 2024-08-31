@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bottomSheetTitle":
             MessageLookupByLibrary.simpleMessage("What would you like to do?"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "categorires": MessageLookupByLibrary.simpleMessage("Categorires"),
+        "categorires": MessageLookupByLibrary.simpleMessage("Categories"),
         "dismiss": MessageLookupByLibrary.simpleMessage("DISSMISS"),
         "downloadButtonText": MessageLookupByLibrary.simpleMessage("Dwonload"),
         "error": MessageLookupByLibrary.simpleMessage(

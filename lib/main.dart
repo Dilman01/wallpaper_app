@@ -7,9 +7,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wallpaper_app/core/common/providers/app_theme_mode_provider.dart';
 import 'package:wallpaper_app/core/common/providers/language_code_provider.dart';
+import 'package:wallpaper_app/core/constants/app_colors.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
 import 'package:wallpaper_app/core/router/router_provider.dart';
+import 'package:wallpaper_app/core/theme/app_theme.dart';
 import 'package:wallpaper_app/generated/l10n.dart';
 
 import 'package:wallpaper_app/view/home/home_screen.dart';
@@ -20,6 +23,12 @@ import 'package:wallpaper_app/view/settings/settings_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+    ],
+  );
+
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   prefs.getString('lang-code') ?? prefs.setString('lang-code', 'en');
@@ -38,21 +47,27 @@ class WallpaperApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routeProvider);
     final languageCode = ref.watch(languageCodeProvider);
+    final themeMode = ref.watch(appThemeModeProvider);
 
     return ScreenUtilInit(
       designSize: const Size(720, 1280),
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        locale: Locale(languageCode.value ?? 'en'),
-        routerConfig: router,
-      ),
+      builder: (_, __) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          themeMode: themeMode,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          locale: Locale(languageCode.value ?? 'en'),
+          routerConfig: router,
+        );
+      },
     );
   }
 }
@@ -85,13 +100,22 @@ class _WallAppState extends State<WallApp> {
   @override
   Widget build(BuildContext context) {
     List<PersistentBottomNavBarItem> navBarItems = [
-      navBarItem(svgPath: AssetPaths.homeIcon, title: S.of(context).home),
       navBarItem(
-          svgPath: AssetPaths.categoryIcon, title: S.of(context).categorires),
+          svgPath: AssetPaths.homeIcon,
+          title: S.of(context).home,
+          context: context),
       navBarItem(
-          svgPath: AssetPaths.favoritesIcon, title: S.of(context).favorites),
+          svgPath: AssetPaths.categoryIcon,
+          title: S.of(context).categorires,
+          context: context),
       navBarItem(
-          svgPath: AssetPaths.settingsIcon, title: S.of(context).settings),
+          svgPath: AssetPaths.favoritesIcon,
+          title: S.of(context).favorites,
+          context: context),
+      navBarItem(
+          svgPath: AssetPaths.settingsIcon,
+          title: S.of(context).settings,
+          context: context),
     ];
 
     return SafeArea(
@@ -100,7 +124,7 @@ class _WallAppState extends State<WallApp> {
         controller: controller,
         screens: screens,
         items: navBarItems,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
         handleAndroidBackButtonPress: false,
         navBarStyle: NavBarStyle.style7,
       ),
@@ -111,33 +135,30 @@ class _WallAppState extends State<WallApp> {
 PersistentBottomNavBarItem navBarItem({
   required String svgPath,
   required String title,
+  required BuildContext context,
 }) {
   return PersistentBottomNavBarItem(
-    icon: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6).r,
-      child: SvgPicture.asset(
-        svgPath,
-        height: 35.h,
-        width: 35.w,
-      ),
+    icon: SvgPicture.asset(
+      svgPath,
+      height: 35.h,
+      width: 35.w,
     ),
     inactiveIcon: SvgPicture.asset(
       svgPath,
       height: 35.h,
       width: 35.w,
       colorFilter: const ColorFilter.mode(
-        Color.fromRGBO(168, 168, 168, 1),
+        AppColorsLight.inactiveTabColor,
         BlendMode.srcIn,
       ),
     ),
-    title: title,
-    textStyle: TextStyle(
-      fontSize: 27.sp,
-      fontWeight: FontWeight.w500,
-    ),
+    title: ' $title ',
+    textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
     contentPadding: 10.r,
-    activeColorPrimary: const Color.fromRGBO(240, 240, 240, 1),
-    activeColorSecondary: Colors.black,
-    inactiveColorPrimary: const Color.fromRGBO(168, 168, 168, 1),
+    activeColorPrimary: AppColorsLight.activeTabColor,
+    activeColorSecondary: AppColorsLight.activeSecondaryTabColor,
+    inactiveColorPrimary: AppColorsLight.inactiveTabColor,
   );
 }

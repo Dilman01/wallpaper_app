@@ -66,6 +66,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                   Text(
                     S.of(context).setDialogHeader,
                     style: TextStyle(
+                      color: Colors.black,
                       fontSize: 35.spMin,
                       fontWeight: FontWeight.bold,
                     ),
@@ -76,6 +77,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                   Text(
                     S.of(context).setDialogBody,
                     style: TextStyle(
+                      color: Colors.black,
                       fontSize: 26.spMin,
                     ),
                   ),
@@ -124,6 +126,7 @@ class _ButtomSheetState extends State<ButtomSheet> {
                 Text(
                   S.of(context).bottomSheetTitle,
                   style: TextStyle(
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 40.spMin,
                   ),
@@ -174,12 +177,12 @@ class _ButtomSheetState extends State<ButtomSheet> {
                   onPressed: () {
                     context.pop();
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(25, 30, 49, 1),
-                    foregroundColor: Colors.white,
-                    fixedSize: Size(500.w, 80.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50).r,
+                  style: ElevatedButton.styleFrom().copyWith(
+                    foregroundColor: const WidgetStatePropertyAll(
+                      Colors.white,
+                    ),
+                    backgroundColor: const WidgetStatePropertyAll(
+                      Color.fromRGBO(25, 30, 49, 1),
                     ),
                   ),
                   child: Text(
@@ -229,6 +232,7 @@ class SetWallpaperButton extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 35.spMin,
               ),
             )

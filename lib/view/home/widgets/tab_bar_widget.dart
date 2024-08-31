@@ -19,17 +19,17 @@ class _TabBarWidgetState extends State<TabBarWidget> {
     return Container(
       margin: const EdgeInsets.only(bottom: 30, left: 20, right: 20).r,
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(225, 244, 255, 1),
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(60.r),
       ),
       child: TabBar(
         dividerColor: Colors.transparent,
         indicator: BoxDecoration(
           borderRadius: BorderRadius.circular(40.r),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [
-              Color.fromRGBO(103, 71, 231, 1),
-              Color.fromRGBO(0, 255, 240, 1),
+              Theme.of(context).colorScheme.primary,
+              Theme.of(context).colorScheme.onPrimary,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -38,7 +38,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
         indicatorPadding:
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10).r,
         indicatorSize: TabBarIndicatorSize.tab,
-        labelColor: Colors.white,
+        labelColor: Theme.of(context).colorScheme.onSecondary,
         labelStyle: TextStyle(fontSize: 24.sp),
         splashFactory: NoSplash.splashFactory,
         isScrollable: false,

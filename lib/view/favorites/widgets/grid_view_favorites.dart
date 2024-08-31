@@ -20,7 +20,10 @@ class GridViewFavorites extends ConsumerWidget {
       data: (data) {
         if (data.isEmpty) {
           return Center(
-            child: Text(S.of(context).noFavorites),
+            child: Text(
+              S.of(context).noFavorites,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           );
         }
 
@@ -52,7 +55,10 @@ class GridViewFavorites extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) => Center(
-        child: Text(S.of(context).error),
+        child: Text(
+          S.of(context).error,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
       loading: () => const ShimmerLoading(),
     );

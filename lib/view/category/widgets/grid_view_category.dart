@@ -7,6 +7,7 @@ import 'package:wallpaper_app/core/common/providers/internet_connection_provider
 import 'package:wallpaper_app/core/common/widgets/no_internet.dart';
 import 'package:wallpaper_app/core/common/widgets/shimmer_loading.dart';
 import 'package:wallpaper_app/core/common/widgets/wallpaper_card.dart';
+import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/view_model/category_view_model/category_view_model_provider.dart';
 
 class GridViewCategory extends ConsumerWidget {
@@ -72,16 +73,22 @@ class GridViewCategory extends ConsumerWidget {
                   ),
                 );
               },
-              error: (error, stackTrace) => const Center(
-                child: Text('Something went wrong! try again later.'),
+              error: (error, stackTrace) => Center(
+                child: Text(
+                  S.of(context).error,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
               loading: () => const ShimmerLoading(),
             );
           },
         );
       },
-      error: (error, stackTrace) => const Center(
-        child: Text('Something went wrong! try again later.'),
+      error: (error, stackTrace) => Center(
+        child: Text(
+          S.of(context).error,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
       loading: () => const ShimmerLoading(),
     );

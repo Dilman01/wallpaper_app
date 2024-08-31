@@ -24,6 +24,7 @@ class WallpaperCard extends ConsumerWidget {
     return Hero(
       tag: isFavoritesScreen == 'yes' ? wallpaper.largeImageURL : wallpaper.id,
       child: Material(
+        color: Colors.transparent,
         child: InkWell(
           onTap: () {
             context.pushNamed(

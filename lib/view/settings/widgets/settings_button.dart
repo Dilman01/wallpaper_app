@@ -32,7 +32,7 @@ class _SettingsButtonState extends State<SettingsButton> {
               height: 70.h,
               width: 70.h,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(25, 30, 49, 1),
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 borderRadius: BorderRadius.circular(20).r,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 6).r,
@@ -41,6 +41,10 @@ class _SettingsButtonState extends State<SettingsButton> {
                   widget.svgPath,
                   height: 45.h,
                   width: 36.w,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).primaryColor,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),
@@ -49,10 +53,7 @@ class _SettingsButtonState extends State<SettingsButton> {
             ),
             Text(
               widget.title,
-              style: TextStyle(
-                color: const Color.fromRGBO(34, 34, 34, 1),
-                fontSize: 35.spMin,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),
@@ -64,13 +65,14 @@ class _SettingsButtonState extends State<SettingsButton> {
                 switchValue = value;
               });
             },
-            activeTrackColor: const Color.fromRGBO(25, 30, 49, 1),
-            inactiveTrackColor: Colors.white,
+            activeTrackColor: Theme.of(context).colorScheme.onPrimaryContainer,
+            activeColor: Theme.of(context).colorScheme.onSecondary,
+            inactiveTrackColor: Theme.of(context).colorScheme.onSecondary,
           ),
         if (!widget.isNotification)
-          const Icon(
+          Icon(
             Icons.arrow_forward_ios_rounded,
-            color: Color.fromRGBO(197, 197, 197, 1),
+            color: Theme.of(context).colorScheme.outline,
           ),
       ],
     );

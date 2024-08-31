@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wallpaper_app/core/common/providers/app_theme_mode_provider.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
 import 'package:wallpaper_app/generated/l10n.dart';
 import 'package:wallpaper_app/view/settings/widgets/settings_button.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(appThemeModeProvider);
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        backgroundColor: Colors.white,
         title: Text(
           S.of(context).settings,
-          style: TextStyle(
-            fontSize: 50.spMin,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         centerTitle: true,
         elevation: 0,
@@ -38,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 40).r,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50).r,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onSecondary,
               boxShadow: const [
                 BoxShadow(
                   color: Color.fromRGBO(0, 0, 0, 0.16),
@@ -121,6 +117,34 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: 30.h,
+          ),
+          themeMode == ThemeMode.light
+              ? IconButton(
+                  onPressed: () {
+                    ref
+                        .read(appThemeModeProvider.notifier)
+                        .changeTheme(ThemeMode.dark);
+                  },
+                  icon: Icon(
+                    Icons.light_mode,
+                    color: Colors.black,
+                    size: 100.r,
+                  ),
+                )
+              : IconButton(
+                  onPressed: () {
+                    ref
+                        .read(appThemeModeProvider.notifier)
+                        .changeTheme(ThemeMode.light);
+                  },
+                  icon: Icon(
+                    Icons.dark_mode,
+                    color: Colors.white,
+                    size: 100.r,
+                  ),
+                ),
         ],
       ),
     );
