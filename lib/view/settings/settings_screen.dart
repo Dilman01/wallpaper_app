@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wallpaper_app/core/common/providers/app_theme_mode_provider.dart';
+// import 'package:wallpaper_app/core/common/providers/app_theme_mode_provider.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
 import 'package:wallpaper_app/core/router/route_names.dart';
 import 'package:wallpaper_app/generated/l10n.dart';
@@ -14,7 +14,7 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(appThemeModeProvider);
+    // final themeMode = ref.watch(appThemeModeProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -28,7 +28,7 @@ class SettingsScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 750.h,
+            height: 800.h,
             width: 670.w,
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 30).r,
             padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 40).r,
@@ -44,22 +44,22 @@ class SettingsScreen extends ConsumerWidget {
               ],
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 20.h,
                 ),
-                SettingsButton(
-                  title: S.of(context).pushNotification,
-                  svgPath: AssetPaths.notificationIcon,
-                  isNotification: true,
-                ),
-                const Divider(
-                  color: Color.fromRGBO(197, 197, 197, 1),
-                  thickness: 0.8,
-                  indent: 50,
-                ),
+                // SettingsButton(
+                //   title: S.of(context).pushNotification,
+                //   svgPath: AssetPaths.notificationIcon,
+                //   isNotification: true,
+                // ),
+                // const Divider(
+                //   color: Color.fromRGBO(197, 197, 197, 1),
+                //   thickness: 0.8,
+                //   indent: 50,
+                // ),
                 InkWell(
                   onTap: () {
                     context.pushNamed(RouteNames.language);
@@ -69,82 +69,82 @@ class SettingsScreen extends ConsumerWidget {
                     svgPath: AssetPaths.languageIcon,
                   ),
                 ),
-                const Divider(
-                  color: Color.fromRGBO(197, 197, 197, 1),
-                  thickness: 0.8,
-                  indent: 50,
-                ),
-                SettingsButton(
-                  title: S.of(context).invite,
-                  svgPath: AssetPaths.inviteIcon,
-                ),
-                const Divider(
-                  color: Color.fromRGBO(197, 197, 197, 1),
-                  thickness: 0.8,
-                  indent: 50,
-                ),
-                SettingsButton(
-                  title: S.of(context).rate,
-                  svgPath: AssetPaths.starIcon,
-                ),
-                const Divider(
-                  color: Color.fromRGBO(197, 197, 197, 1),
-                  thickness: 0.8,
-                  indent: 50,
-                ),
-                SettingsButton(
-                  title: S.of(context).feedback,
-                  svgPath: AssetPaths.feedbackIcon,
-                ),
-                const Divider(
-                  color: Color.fromRGBO(197, 197, 197, 1),
-                  thickness: 0.8,
-                  indent: 50,
-                ),
-                SettingsButton(
-                  title: S.of(context).terms,
-                  svgPath: AssetPaths.termsIcon,
-                ),
-                const Divider(
-                  color: Color.fromRGBO(197, 197, 197, 1),
-                  thickness: 0.8,
-                  indent: 50,
-                ),
-                SettingsButton(
-                  title: S.of(context).privacy,
-                  svgPath: AssetPaths.privacyIcon,
-                ),
+                // const Divider(
+                //   color: Color.fromRGBO(197, 197, 197, 1),
+                //   thickness: 0.8,
+                //   indent: 50,
+                // ),
+                // SettingsButton(
+                //   title: S.of(context).invite,
+                //   svgPath: AssetPaths.inviteIcon,
+                // ),
+                // const Divider(
+                //   color: Color.fromRGBO(197, 197, 197, 1),
+                //   thickness: 0.8,
+                //   indent: 50,
+                // ),
+                // SettingsButton(
+                //   title: S.of(context).rate,
+                //   svgPath: AssetPaths.starIcon,
+                // ),
+                // const Divider(
+                //   color: Color.fromRGBO(197, 197, 197, 1),
+                //   thickness: 0.8,
+                //   indent: 50,
+                // ),
+                // SettingsButton(
+                //   title: S.of(context).feedback,
+                //   svgPath: AssetPaths.feedbackIcon,
+                // ),
+                // const Divider(
+                //   color: Color.fromRGBO(197, 197, 197, 1),
+                //   thickness: 0.8,
+                //   indent: 50,
+                // ),
+                // SettingsButton(
+                //   title: S.of(context).terms,
+                //   svgPath: AssetPaths.termsIcon,
+                // ),
+                // const Divider(
+                //   color: Color.fromRGBO(197, 197, 197, 1),
+                //   thickness: 0.8,
+                //   indent: 50,
+                // ),
+                // SettingsButton(
+                //   title: S.of(context).privacy,
+                //   svgPath: AssetPaths.privacyIcon,
+                // ),
               ],
             ),
           ),
           SizedBox(
             height: 30.h,
           ),
-          themeMode == ThemeMode.light
-              ? IconButton(
-                  onPressed: () {
-                    ref
-                        .read(appThemeModeProvider.notifier)
-                        .changeTheme(ThemeMode.dark);
-                  },
-                  icon: Icon(
-                    Icons.light_mode,
-                    color: Colors.black,
-                    size: 100.r,
-                  ),
-                )
-              : IconButton(
-                  onPressed: () {
-                    ref
-                        .read(appThemeModeProvider.notifier)
-                        .changeTheme(ThemeMode.light);
-                  },
-                  icon: Icon(
-                    Icons.dark_mode,
-                    color: Colors.white,
-                    size: 100.r,
-                  ),
-                ),
+          // themeMode == ThemeMode.light
+          //     ? IconButton(
+          //         onPressed: () {
+          //           ref
+          //               .read(appThemeModeProvider.notifier)
+          //               .changeTheme(ThemeMode.dark);
+          //         },
+          //         icon: Icon(
+          //           Icons.light_mode,
+          //           color: Colors.black,
+          //           size: 100.r,
+          //         ),
+          //       )
+          //     : IconButton(
+          //         onPressed: () {
+          //           ref
+          //               .read(appThemeModeProvider.notifier)
+          //               .changeTheme(ThemeMode.light);
+          //         },
+          //         icon: Icon(
+          //           Icons.dark_mode,
+          //           color: Colors.white,
+          //           size: 100.r,
+          //         ),
+          //       ),
         ],
       ),
     );

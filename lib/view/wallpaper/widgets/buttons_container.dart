@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:wallpaper_app/core/constants/asset_paths.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +32,7 @@ class _ButtonsContainerState extends ConsumerState<ButtonsContainer> {
       options: Options(responseType: ResponseType.bytes),
     );
 
-    final result = await ImageGallerySaver.saveImage(
+    final result = await ImageGallerySaverPlus.saveImage(
       Uint8List.fromList(response.data),
       quality: 100,
       name: widget.wallpaper.id.toString(),
