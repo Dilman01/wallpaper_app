@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
@@ -60,7 +61,7 @@ class LocalWallpaperRepository {
         whereArgs: [wallpaper.id],
       );
     } catch (e) {
-      print('Something went wrong when deleteing a Wallpaper, Erorr: $e');
+      debugPrint('Something went wrong when deleteing a Wallpaper, Erorr: $e');
     }
   }
 }

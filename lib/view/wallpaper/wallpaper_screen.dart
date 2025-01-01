@@ -32,12 +32,14 @@ class WallpaperScreen extends ConsumerWidget {
               tag: isFavoritesScreen == 'yes'
                   ? wallpaper.largeImageURL
                   : wallpaper.id,
-              child: SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: CachedNetworkImage(
-                  imageUrl: wallpaper.largeImageURL,
-                  fit: BoxFit.cover,
+              child: InteractiveViewer(
+                child: SizedBox(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: CachedNetworkImage(
+                    imageUrl: wallpaper.largeImageURL,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

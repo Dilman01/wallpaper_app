@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:wallpaper_app/core/api/api_client.dart';
 import 'package:wallpaper_app/models/wallpaper_model.dart';
 
@@ -28,7 +29,7 @@ class WallpaperRepository {
           )
           .toList();
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       rethrow;
     }
   }
@@ -51,7 +52,7 @@ class WallpaperRepository {
           )
           .toList();
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       rethrow;
     }
   }
@@ -76,7 +77,7 @@ class WallpaperRepository {
           )
           .toList();
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       rethrow;
     }
   }
